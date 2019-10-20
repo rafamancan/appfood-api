@@ -9,7 +9,6 @@ services:
       - start
     depends_on:
       - db
-      - redis
   db:
     image: "postgres:alpine"
     ports:
@@ -20,7 +19,5 @@ services:
       POSTGRES_USER: appfood
       POSTGRES_PASSWORD: supersecret
       POSTGRES_DB: app_food
-  redis:
-    image: redis
 volumes:
   dbdata: null
