@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,14 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use('Route');
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+  return { greeting: 'Hello world in JSON' };
+});
+
+Route.post('/api/users', 'UserController.store').validator('CreateUser');
+//   .validator('CreateChallenge')
+//   .middleware(['auth']);
+// Route.get('/api/challenges', 'ChallengeController.all');
+// Route.get('/api/challenges/:id', 'ChallengeController.show');
