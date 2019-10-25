@@ -16,9 +16,16 @@ const Factory = use('Factory');
 
 Factory.blueprint('App/Models/User', faker => {
   return {
-    username: faker.username(),
+    name: faker.username(),
     email: faker.email(),
     password: faker.password(),
+  };
+});
+
+Factory.blueprint('App/Models/Address', faker => {
+  return {
+    street: faker.sentece(),
+    number: faker.integer(),
     ...data,
   };
 });

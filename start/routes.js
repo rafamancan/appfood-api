@@ -21,8 +21,11 @@ Route.get('/', () => {
 });
 
 Route.post('/api/users', 'UserController.store').validator('CreateUser');
+Route.post('/api/users/:id/addresses', 'AddressController.store')
+  .validator('CreateUserAddress')
+  .middleware(['auth']);
+Route.get('/api/users/:id/addresses', 'AddressController.show').middleware([
+  'auth',
+]);
+
 Route.post('/api/markets', 'MarketController.store').validator('CreateMarket');
-//   .validator('CreateChallenge')
-//   .middleware(['auth']);
-// Route.get('/api/challenges', 'ChallengeController.all');
-// Route.get('/api/challenges/:id', 'ChallengeController.show');
