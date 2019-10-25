@@ -21,6 +21,7 @@ Route.get('/', () => {
 });
 
 Route.post('/api/users', 'UserController.store').validator('CreateUser');
+Route.post('/api/markets', 'MarketController.store').validator('CreateMarket');
 //   .validator('CreateChallenge')
 //   .middleware(['auth']);
 // Route.get('/api/challenges', 'ChallengeController.all');
