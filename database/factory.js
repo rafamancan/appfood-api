@@ -40,10 +40,16 @@ Factory.blueprint('App/Models/Market', faker => {
 
 Factory.blueprint('App/Models/Category', faker => {
   return {
-    name: faker.sentece(),
-    min_choices: faker.float(),
-    max_choices: faker.float(),
-    price: faker.float(),
-    ...data,
+    name: faker.sentence({ words: 2 }),
+    min_choices: faker.integer({ min: 1, max: 3 }),
+    max_choices: faker.integer({ min: 3, max: 5 }),
+    price: faker.floating({ min: 0, max: 60 }),
+  };
+});
+
+Factory.blueprint('App/Models/Product', faker => {
+  return {
+    name: faker.sentence({ words: 2 }),
+    price: faker.floating({ min: 0, max: 60 }),
   };
 });

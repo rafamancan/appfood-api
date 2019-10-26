@@ -34,6 +34,10 @@ class Market extends Model {
   tokens() {
     return this.hasMany('App/Models/Token');
   }
+
+  categories() {
+    return this.hasMany('App/Models/Category');
+  }
 }
 
 module.exports = Market;

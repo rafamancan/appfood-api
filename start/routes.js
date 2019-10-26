@@ -26,8 +26,10 @@ Route.get('/', () => {
 |--------------------------------------------------------------------------
 */
 Route.group(() => {
+  // user
   Route.post('/', 'UserController.store').validator('CreateUser');
 
+  // address
   Route.get('/:id/addresses', 'AddressController.show').middleware('auth:user');
   Route.post('/:id/addresses', 'AddressController.store')
     .validator('CreateUserAddress')
@@ -40,12 +42,25 @@ Route.group(() => {
 |--------------------------------------------------------------------------
 */
 Route.group(() => {
+  // market
   Route.post('/', 'MarketController.store').validator('CreateMarket');
 
-  Route.get('/:id/categories', 'CategoryController.show').middleware([
+  // category
+  Route.get('/:market_id/categories', 'CategoryController.show').middleware([
     'auth:market',
   ]);
-  Route.post('/:id/categories', 'CategoryController.store')
+  Route.post('/:market_id/categories', 'CategoryController.store')
     .validator('CreateMarketCategory')
+    .middleware(['auth:market']);
+  Route.post('/:market_id/categories', 'CategoryController.store')
+    .validator('CreateMarketCategory')
+    .middleware(['auth:market']);
+
+  // product
+  Route.post(
+    '/:market_id/categories/:category_id/products',
+    'ProductController.store'
+  )
+    .validator('CreateCategoryProduct')
     .middleware(['auth:market']);
 }).prefix('api/v1/markets');
