@@ -29,3 +29,21 @@ Factory.blueprint('App/Models/Address', faker => {
     ...data,
   };
 });
+
+Factory.blueprint('App/Models/Market', faker => {
+  return {
+    name: faker.username(),
+    email: faker.email(),
+    password: faker.password(),
+  };
+});
+
+Factory.blueprint('App/Models/Category', faker => {
+  return {
+    name: faker.sentece(),
+    min_choices: faker.float(),
+    max_choices: faker.float(),
+    price: faker.float(),
+    ...data,
+  };
+});

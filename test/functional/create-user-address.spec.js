@@ -16,7 +16,7 @@ test('can create user address with valid data', async ({ assert, client }) => {
 
   const response = await client
     .post(`/api/users/${user.id}/addresses`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'user')
     .send(data)
     .end();
 
@@ -39,7 +39,7 @@ test("can't create user address with empty street", async ({
 
   const response = await client
     .post(`/api/users/${user.id}/addresses`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'user')
     .send(data)
     .end();
 
@@ -65,7 +65,7 @@ test("can't create user address with empty number", async ({
 
   const response = await client
     .post(`/api/users/${user.id}/addresses`)
-    .loginVia(user, 'jwt')
+    .loginVia(user, 'user')
     .send(data)
     .end();
 

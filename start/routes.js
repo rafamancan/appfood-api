@@ -21,11 +21,21 @@ Route.get('/', () => {
 });
 
 Route.post('/api/users', 'UserController.store').validator('CreateUser');
+
 Route.post('/api/users/:id/addresses', 'AddressController.store')
   .validator('CreateUserAddress')
-  .middleware(['auth']);
-Route.get('/api/users/:id/addresses', 'AddressController.show').middleware([
-  'auth',
-]);
+  .middleware('auth:user');
+
+Route.get('/api/users/:id/addresses', 'AddressController.show').middleware(
+  'auth:user'
+);
 
 Route.post('/api/markets', 'MarketController.store').validator('CreateMarket');
+
+Route.post('/api/markets/:id/categories', 'CategoryController.store')
+  .validator('CreateMarketCategory')
+  .middleware(['auth:market']);
+
+Route.get('/api/markets/:id/categories', 'CategoryController.show').middleware([
+  'auth:market',
+]);

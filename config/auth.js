@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 
 /** @type {import('@adonisjs/framework/src/Env')} */
-const Env = use('Env')
+const Env = use('Env');
 
 module.exports = {
   /*
@@ -16,7 +16,7 @@ module.exports = {
   | Available Serializers - lucid, database
   |
   */
-  authenticator: 'jwt',
+  authenticator: 'user',
 
   /*
   |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ module.exports = {
     model: 'App/Models/User',
     scheme: 'session',
     uid: 'email',
-    password: 'password'
+    password: 'password',
   },
 
   /*
@@ -53,7 +53,7 @@ module.exports = {
     model: 'App/Models/User',
     scheme: 'basic',
     uid: 'email',
-    password: 'password'
+    password: 'password',
   },
 
   /*
@@ -65,16 +65,16 @@ module.exports = {
   | via HTTP `Authorization` header.
   |
   */
-  jwt: {
-    serializer: 'lucid',
-    model: 'App/Models/User',
-    scheme: 'jwt',
-    uid: 'email',
-    password: 'password',
-    options: {
-      secret: Env.get('APP_KEY')
-    }
-  },
+  // jwt: {
+  //   serializer: 'lucid',
+  //   model: 'App/Models/User',
+  //   scheme: 'jwt',
+  //   uid: 'email',
+  //   password: 'password',
+  //   options: {
+  //     secret: Env.get('APP_KEY'),
+  //   },
+  // },
 
   /*
   |--------------------------------------------------------------------------
@@ -89,6 +89,36 @@ module.exports = {
     model: 'App/Models/User',
     scheme: 'api',
     uid: 'email',
-    password: 'password'
-  }
-}
+    password: 'password',
+  },
+
+  /*
+  |--------------------------------------------------------------------------
+  | Custom
+  |--------------------------------------------------------------------------
+  |
+  | The Api scheme makes use of API personal tokens to authenticate a user.
+  |
+  */
+  user: {
+    serializer: 'lucid',
+    model: 'App/Models/User',
+    scheme: 'jwt',
+    uid: 'email',
+    password: 'password',
+    options: {
+      secret: Env.get('APP_KEY'),
+    },
+  },
+
+  market: {
+    serializer: 'lucid',
+    model: 'App/Models/Market',
+    scheme: 'jwt',
+    uid: 'email',
+    password: 'password',
+    options: {
+      secret: Env.get('APP_KEY'),
+    },
+  },
+};
