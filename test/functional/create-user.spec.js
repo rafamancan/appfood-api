@@ -14,7 +14,7 @@ test('can create user with valid data', async ({ assert, client }) => {
   };
 
   const response = await client
-    .post('/api/users')
+    .post('/api/v1/users')
     .send(data)
     .end();
 
@@ -33,7 +33,7 @@ test("can't create user with invalid email", async ({ assert, client }) => {
   };
 
   const response = await client
-    .post('/api/users')
+    .post('/api/v1/users')
     .send(data)
     .end();
 
@@ -58,7 +58,7 @@ test("can't create user when email already in use", async ({
   };
 
   const response = await client
-    .post('/api/users')
+    .post('/api/v1/users')
     .send(data)
     .end();
 

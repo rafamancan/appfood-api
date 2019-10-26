@@ -20,7 +20,7 @@ test('can create market category with valid data', async ({
   };
 
   const response = await client
-    .post(`/api/markets/${market.id}/categories`)
+    .post(`/api/v1/markets/${market.id}/categories`)
     .loginVia(market, 'market')
     .send(data)
     .end();
@@ -47,7 +47,7 @@ test("can't create market category with empty name", async ({
   };
 
   const response = await client
-    .post(`/api/markets/${market.id}/categories`)
+    .post(`/api/v1/markets/${market.id}/categories`)
     .loginVia(market, 'market')
     .send(data)
     .end();
@@ -76,7 +76,7 @@ test("can't create market category if not authenticated", async ({
   };
 
   const response = await client
-    .post(`/api/markets/${market.id}/categories`)
+    .post(`/api/v1/markets/${market.id}/categories`)
     .send(data)
     .end();
 

@@ -20,22 +20,32 @@ Route.get('/', () => {
   return { greeting: 'Hello world in JSON' };
 });
 
-Route.post('/api/users', 'UserController.store').validator('CreateUser');
+/*
+|--------------------------------------------------------------------------
+| Users
+|--------------------------------------------------------------------------
+*/
+Route.group(() => {
+  Route.post('/', 'UserController.store').validator('CreateUser');
 
-Route.post('/api/users/:id/addresses', 'AddressController.store')
-  .validator('CreateUserAddress')
-  .middleware('auth:user');
+  Route.get('/:id/addresses', 'AddressController.show').middleware('auth:user');
+  Route.post('/:id/addresses', 'AddressController.store')
+    .validator('CreateUserAddress')
+    .middleware('auth:user');
+}).prefix('api/v1/users');
 
-Route.get('/api/users/:id/addresses', 'AddressController.show').middleware(
-  'auth:user'
-);
+/*
+|--------------------------------------------------------------------------
+| Markets
+|--------------------------------------------------------------------------
+*/
+Route.group(() => {
+  Route.post('/', 'MarketController.store').validator('CreateMarket');
 
-Route.post('/api/markets', 'MarketController.store').validator('CreateMarket');
-
-Route.post('/api/markets/:id/categories', 'CategoryController.store')
-  .validator('CreateMarketCategory')
-  .middleware(['auth:market']);
-
-Route.get('/api/markets/:id/categories', 'CategoryController.show').middleware([
-  'auth:market',
-]);
+  Route.get('/:id/categories', 'CategoryController.show').middleware([
+    'auth:market',
+  ]);
+  Route.post('/:id/categories', 'CategoryController.store')
+    .validator('CreateMarketCategory')
+    .middleware(['auth:market']);
+}).prefix('api/v1/markets');

@@ -14,7 +14,7 @@ test('can create market with valid data', async ({ assert, client }) => {
   };
 
   const response = await client
-    .post('/api/markets')
+    .post('/api/v1/markets')
     .send(data)
     .end();
 
@@ -33,7 +33,7 @@ test("can't create market with invalid email", async ({ assert, client }) => {
   };
 
   const response = await client
-    .post('/api/markets')
+    .post('/api/v1/markets')
     .send(data)
     .end();
 
@@ -58,7 +58,7 @@ test("can't create market when email already in use", async ({
   };
 
   const response = await client
-    .post('/api/markets')
+    .post('/api/v1/markets')
     .send(data)
     .end();
 
