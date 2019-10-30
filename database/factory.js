@@ -22,11 +22,26 @@ Factory.blueprint('App/Models/User', faker => {
   };
 });
 
+Factory.blueprint('App/Models/Address', faker => {
+  return {
+    street: faker.sentence({ words: 3 }),
+    number: faker.integer({ min: 0, max: 60 }),
+  };
+});
+
 Factory.blueprint('App/Models/Market', faker => {
   return {
     name: faker.username(),
     email: faker.email(),
     password: faker.password(),
+  };
+});
+
+Factory.blueprint('App/Models/Order', faker => {
+  return {
+    obs: faker.sentence({ words: 5 }),
+    total: faker.floating({ min: 0, max: 60 }),
+    status: 'pedido_feito',
   };
 });
 

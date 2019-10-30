@@ -30,14 +30,21 @@ Route.group(() => {
   Route.post('/', 'UserController.store').validator('CreateUser');
 
   // address
-  Route.get('/:id/addresses', 'AddressController.show').middleware('auth:user');
-  Route.post('/:id/addresses', 'AddressController.store')
+  Route.get('/:user_id/addresses', 'AddressController.show').middleware(
+    'auth:user'
+  );
+  Route.post('/:user_id/addresses', 'AddressController.store')
     .validator('CreateUserAddress')
     .middleware('auth:user');
 
   // order
-  Route.post('/:id/orders', 'OrderController.store')
+  Route.post('/:user_id/orders', 'OrderController.store')
     .validator('CreateUserOrder')
+    .middleware('auth:user');
+
+  // items
+  Route.post('/:user_id/orders/:order_id/items', 'ItemController.store')
+    .validator('CreateOrderItem')
     .middleware('auth:user');
 }).prefix('api/v1/users');
 

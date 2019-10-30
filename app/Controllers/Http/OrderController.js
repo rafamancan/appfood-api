@@ -8,9 +8,22 @@ const Order = use('App/Models/Order');
 class OrderController {
   async store({ response, params, request }) {
     const { user_id } = params;
-    await User.firstOrFail('id', user_id);
-    await Address.firstOrFail('id', request.only(['address_id']));
-    await Market.firstOrFail('id', request.only(['market_id']));
+    const { address_id, market_id } = request.only(['address_id', 'market_id']);
+
+    const user = User.find(user_id);
+    if (!user) {
+      return response.status(400).send([{ error: 'User not found' }]);
+    }
+
+    const address = Address.find(address_id);
+    if (!address) {
+      return response.status(400).send([{ error: 'Address not found' }]);
+    }
+
+    const market = Market.find(market_id);
+    if (!market) {
+      return response.status(400).send([{ error: 'Market not found' }]);
+    }
 
     const data = request.only([
       'address_id',

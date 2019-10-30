@@ -6,8 +6,10 @@ const Product = use('App/Models/Product');
 class CategoryController {
   async store({ response, params, request }) {
     const { category_id } = params;
-    await Category.firstOrFail('id', category_id);
-
+    const category = Category.find(category_id);
+    if (!category) {
+      return response.status(400).send([{ error: 'Category not found' }]);
+    }
     const data = request.only(['name', 'price']);
 
     const product = await Product.create({ ...data, category_id });
