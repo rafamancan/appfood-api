@@ -22,14 +22,6 @@ Factory.blueprint('App/Models/User', faker => {
   };
 });
 
-Factory.blueprint('App/Models/Address', faker => {
-  return {
-    street: faker.sentece(),
-    number: faker.integer(),
-    ...data,
-  };
-});
-
 Factory.blueprint('App/Models/Market', faker => {
   return {
     name: faker.username(),

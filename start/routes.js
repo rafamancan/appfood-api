@@ -34,6 +34,11 @@ Route.group(() => {
   Route.post('/:id/addresses', 'AddressController.store')
     .validator('CreateUserAddress')
     .middleware('auth:user');
+
+  // order
+  Route.post('/:id/orders', 'OrderController.store')
+    .validator('CreateUserOrder')
+    .middleware('auth:user');
 }).prefix('api/v1/users');
 
 /*
