@@ -178,6 +178,7 @@ test("can't create order with invalid enum status value", async ({
 }) => {
   const market = await Factory.model('App/Models/Market').create();
   const user = await Factory.model('App/Models/User').create();
+
   const dataAddress = {
     street: 'Rua sei la o que teste',
     number: '90',
