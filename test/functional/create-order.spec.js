@@ -53,6 +53,48 @@ test('can create order with valid data', async ({ assert, client }) => {
   });
 });
 
+test("can't create order without authenticated user", async ({
+  assert,
+  client,
+}) => {
+  const market = await Factory.model('App/Models/Market').create();
+  const user = await Factory.model('App/Models/User').create();
+
+  const dataAddress = {
+    street: 'Rua sei la o que teste',
+    number: '90',
+  };
+
+  const address = await client
+    .post(`/api/v1/users/${user.id}/addresses`)
+    .loginVia(user, 'user')
+    .send(dataAddress)
+    .end();
+
+  address.assertStatus(201);
+  address.assertJSONSubset({
+    street: dataAddress.street,
+    number: dataAddress.number,
+  });
+
+  const address_id = address.body.id;
+  const data = {
+    user_id: user.id,
+    market_id: market.id,
+    address_id,
+    status: 'pedido_feito',
+    obs: 'obs test',
+    total: 0.0,
+  };
+
+  const response = await client
+    .post(`api/v1/users/${user.id}/orders`)
+    .send(data)
+    .end();
+
+  response.assertStatus(401);
+});
+
 test("can't create order without addrress", async ({ assert, client }) => {
   const market = await Factory.model('App/Models/Market').create();
   const user = await Factory.model('App/Models/User').create();
