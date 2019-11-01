@@ -60,3 +60,10 @@ Factory.blueprint('App/Models/Product', faker => {
     price: faker.floating({ min: 0, max: 60 }),
   };
 });
+
+Factory.blueprint('App/Models/Item', faker => {
+  return {
+    obs: faker.sentence({ words: 2 }),
+    total: faker.floating({ min: 0, max: 60 }),
+  };
+});

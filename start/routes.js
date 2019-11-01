@@ -46,6 +46,14 @@ Route.group(() => {
   Route.post('/:user_id/orders/:order_id/items', 'ItemController.store')
     .validator('CreateOrderItem')
     .middleware('auth:user');
+
+  // items product
+  Route.post(
+    '/:user_id/orders/:order_id/items/:item_id/products/:product_id',
+    'ItemProductController.store'
+  )
+    .validator('CreateItemProduct')
+    .middleware('auth:user');
 }).prefix('api/v1/users');
 
 /*

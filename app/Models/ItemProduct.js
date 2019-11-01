@@ -3,13 +3,9 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model');
 
-class Item extends Model {
-  orders() {
-    return this.belongsTo('App/Models/Order');
-  }
-
-  categories() {
-    return this.belongsTo('App/Models/Category');
+class ItemProduct extends Model {
+  items() {
+    return this.belongsTo('App/Models/Item');
   }
 
   products() {
@@ -17,4 +13,4 @@ class Item extends Model {
   }
 }
 
-module.exports = Item;
+module.exports = ItemProduct;
