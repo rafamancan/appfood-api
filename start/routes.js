@@ -29,6 +29,11 @@ Route.group(() => {
   // user
   Route.post('/', 'UserController.store').validator('CreateUser');
 
+  // sessions
+  Route.post('/sessions', 'SessionController.create').validator(
+    'CreateUserSession'
+  );
+
   // address
   Route.get('/:user_id/addresses', 'AddressController.show').middleware(
     'auth:user'

@@ -9,6 +9,8 @@ services:
       - start
     depends_on:
       - db
+    networks:
+      - appfood-network
   db:
     image: 'postgres:alpine'
     ports:
@@ -19,10 +21,12 @@ services:
       POSTGRES_USER: appfood
       POSTGRES_PASSWORD: supersecret
       POSTGRES_DB: app_food
+    networks:
+      - appfood-network
   db_test:
     image: 'postgres:alpine'
     ports:
-      - '55432:5432'
+      - '55433:5432'
     volumes:
       - 'dbtestdata:/var/lib/postgresql/data'
     environment:
@@ -32,3 +36,6 @@ services:
 volumes:
   dbdata: null
   dbtestdata: null
+networks:
+  appfood-network:
+    driver: bridge
