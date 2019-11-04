@@ -33,8 +33,4 @@ test('can authenticate with valid user credentials', async ({
     .end();
 
   authenticated.assertStatus(200);
-  authenticated.assertJSONSubset({
-    type: 'bearer',
-    refreshToken: null,
-  });
 });

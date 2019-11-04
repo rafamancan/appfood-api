@@ -28,6 +28,9 @@ Route.get('/', () => {
 Route.group(() => {
   // user
   Route.post('/', 'UserController.store').validator('CreateUser');
+  Route.put('/', 'UserController.update')
+    .validator('UpdateUser')
+    .middleware('auth:user');
 
   // sessions
   Route.post('/sessions', 'SessionController.create').validator(
