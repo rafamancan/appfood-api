@@ -1,4 +1,5 @@
 'use strict';
+const User = use('App/Models/User');
 
 class SessionController {
   async create({ request, auth }) {
@@ -6,7 +7,13 @@ class SessionController {
 
     const token = await auth.attempt(email, password);
 
-    return token;
+    const { name } = await User.findBy('email', email);
+    const profile = {
+      name,
+      email,
+    };
+
+    return { profile, token };
   }
 }
 
