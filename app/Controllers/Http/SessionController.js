@@ -13,7 +13,7 @@ class SessionController {
       email,
     };
 
-    return { profile, token };
+    return { profile, token: token.token };
   }
 }
 

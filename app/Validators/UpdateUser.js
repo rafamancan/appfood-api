@@ -5,7 +5,7 @@ class UpdateUser {
     return {
       name: 'required|string',
       email: 'required|email',
-      password: 'required|string',
+      password: 'string',
     };
   }
 
