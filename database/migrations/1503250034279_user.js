@@ -13,6 +13,10 @@ class UserSchema extends Schema {
         .notNullable()
         .unique();
       table.string('password', 60).notNullable();
+      table
+        .boolean('isAdmin')
+        .notNullable()
+        .defaultTo(0);
       table.timestamps();
     });
   }
